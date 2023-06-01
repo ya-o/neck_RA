@@ -15,7 +15,7 @@ pip install matplotlib
 All setting can be modified in file json_generation.py.
 A json file need to be pre-made for training from a csv file and image folder.
 csv file: refer to annotation.csv.
-Image folder: should with images name "neck" + str(pic_id) + ".jpg"
+Image folder: should with images in the direction "data/NECK/images/neck" + str(pic_id) + ".jpg"
 We also manually set the cross-validation (see "split" in line 52, we currently set 10 folds.)
 "index" in line 53 can set one fold for validation and others for training (default as 0, use first folder).  
 After setting, generate the json file by running command:
