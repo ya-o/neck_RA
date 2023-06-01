@@ -53,6 +53,7 @@ class Kpt2dSviewRgbImgTopDownDataset(Dataset, metaclass=ABCMeta):
         self.pipeline = pipeline
         self.test_mode = test_mode
 
+
         self.ann_info['image_size'] = np.array(data_cfg['image_size'])
         self.ann_info['heatmap_size'] = np.array(data_cfg['heatmap_size'])
         self.ann_info['num_joints'] = data_cfg['num_joints']

@@ -56,6 +56,11 @@ def _distance_acc(distances, thr=0.5):
     distance_valid = distances != -1
     num_distance_valid = distance_valid.sum()
     if num_distance_valid > 0:
+        # print(distances)
+        # print(thr)
+        # print(distances[distance_valid])
+        # print((distances[distance_valid] < thr).sum() / num_distance_valid)
+        # print("--------------")
         return (distances[distance_valid] < thr).sum() / num_distance_valid
     return -1
 
@@ -234,7 +239,8 @@ def keypoint_auc(pred, gt, mask, normalize, num_step=20):
     Returns:
         float: Area under curve.
     """
-    nor = np.tile(np.array([[normalize, normalize]]), (pred.shape[0], 1))
+    # nor = np.tile(np.array([[normalize, normalize]]), (pred.shape[0], 1))
+    nor = normalize
     x = [1.0 * i / num_step for i in range(num_step)]
     y = []
     for thr in x:
