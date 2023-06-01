@@ -248,7 +248,7 @@ cfg.seed = 0
 cfg.log_config.interval = 1
 
 # set evaluation configs
-cfg.evaluation.interval = 5
+cfg.evaluation.interval = 1
 cfg.evaluation.metric = ['PCK', 'NME', "AUC"]
 cfg.evaluation.save_best = 'PCK'
 

@@ -1,8 +1,6 @@
 import json
 import pandas as pd
 import cv2
-from functools import reduce
-import operator
 
 
 def read_csv(root):
@@ -53,6 +51,7 @@ def make_json(data, mode):
 
 split = [[0], [1, 2], [3, 4], [5], [6], [7, 8], [9], [10], [11], [12, 13]]
 index_ = 0
+
 img_dir = "data/NECK/images/"
 point_data = list(read_csv("annotation.csv"))
 
@@ -63,6 +62,7 @@ for i in range(len(select)):
     out = point_data.pop(id)
     val_list.append(out)
 print(val_list)
+
 make_json(point_data, "train")
 make_json(val_list, "val")
 

@@ -1,6 +1,5 @@
 from mmpose.apis import (inference_top_down_pose_model, init_pose_model,
                          vis_pose_result, process_mmdet_results)
-from mmdet.apis import inference_detector, init_detector
 import matplotlib.pyplot as plt
 import json
 import cv2
@@ -8,14 +7,14 @@ import numpy as np
 
 
 img_dir = "data/NECK/images/"
-index = 3
-with open("data/NECK/train.json", "r", encoding="utf-8") as f:
+index = 0
+with open("data/NECK/val.json", "r", encoding="utf-8") as f:
     content = json.load(f)
 selected = content[index]
+
 img = img_dir + selected["image_file"]
 key_points = selected["keypoints"]
 bbox = selected["bbox"]
-# img = 'tests/data/coco/000000196141.jpg'
 person = {}
 person['bbox'] = [int(bbox[0]), int(bbox[1]), int(bbox[0] + bbox[2]), int(bbox[1] + bbox[3]), 0.99]
 person_results = [person]
@@ -64,10 +63,13 @@ vis_result = vis_pose_result(
 # reduce image size
 
 plt.figure()
+plt.title("Pose Estimation")
 plt.imshow(vis_result)
 plt.show()
 plt.close()
 
+
+# show truth
 img2 = cv2.imread(img)
 
 point_r = []
@@ -87,6 +89,7 @@ vis_result2 = vis_pose_result(
     kpt_score_thr=0)
 
 plt.figure()
+plt.title("Truth")
 plt.imshow(vis_result2)
 plt.show()
 
