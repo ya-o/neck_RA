@@ -30,7 +30,7 @@ And run the command:
 ```
 python train_own.py
 ```
-During training, we make a evaluation on validation after each epoch with 'PCK', 'NME', "AUC".
+During training, we make an evaluation on validation after each epoch with 'PCK', 'NME', "AUC".
 
 
 #### Inference
