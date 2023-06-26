@@ -40,3 +40,16 @@ python inference.py
 ```
 Showing two image of "Pose Estimation" and "Truth". Note that the color of point and connection can be modified in file 
 "configs/base/datasets/custom.py"
+
+
+#### Evaluation on Test Set
+```
+python eval_own.py
+```
+In line 191, change Json file name for the set you want to evaluate.
+
+
+#### Draw Loss Plot
+```
+python draw_loss.py
+```

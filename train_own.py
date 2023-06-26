@@ -149,7 +149,7 @@ class TopDownCOCOTinyDataset(Kpt2dSviewRgbImgTopDownDataset):
 
         return name_value
 
-    def _report_metric(self, res_file, metrics, pck_thr=0.5):
+    def _report_metric(self, res_file, metrics, pck_thr=0.3):
         """Keypoint evaluation.
 
         Args:

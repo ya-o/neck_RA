@@ -220,6 +220,45 @@ def keypoint_pck_accuracy(pred, gt, mask, thr, normalize):
     return acc, avg_acc, cnt
 
 
+def keypoint_pck_accuracy2(pred, gt, mask, thr, normalize):
+    """Calculate the pose accuracy of PCK for each individual keypoint and the
+    averaged accuracy across all keypoints for coordinates.
+
+    Note:
+        PCK metric measures accuracy of the localization of the body joints.
+        The distances between predicted positions and the ground-truth ones
+        are typically normalized by the bounding box size.
+        The threshold (thr) of the normalized distance is commonly set
+        as 0.05, 0.1 or 0.2 etc.
+
+        - batch_size: N
+        - num_keypoints: K
+
+    Args:
+        pred (np.ndarray[N, K, 2]): Predicted keypoint location.
+        gt (np.ndarray[N, K, 2]): Groundtruth keypoint location.
+        mask (np.ndarray[N, K]): Visibility of the target. False for invisible
+            joints, and True for visible. Invisible joints will be ignored for
+            accuracy calculation.
+        thr (float): Threshold of PCK calculation.
+        normalize (np.ndarray[N, 2]): Normalization factor for H&W.
+
+    Returns:
+        tuple: A tuple containing keypoint accuracy.
+
+        - acc (np.ndarray[K]): Accuracy of each keypoint.
+        - avg_acc (float): Averaged accuracy across all keypoints.
+        - cnt (int): Number of valid keypoints.
+    """
+    distances = _calc_distances(pred, gt, mask, normalize)
+
+    acc = np.array([_distance_acc(d, thr) for d in distances])
+    valid_acc = acc[acc >= 0]
+    cnt = len(valid_acc)
+    avg_acc = valid_acc.mean() if cnt > 0 else 0
+    return acc, avg_acc, cnt, distances
+
+
 def keypoint_auc(pred, gt, mask, normalize, num_step=20):
     """Calculate the pose accuracy of PCK for each individual keypoint and the
     averaged accuracy across all keypoints for coordinates.

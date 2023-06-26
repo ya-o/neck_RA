@@ -5,7 +5,7 @@ import numpy as np
 from mmpose.apis import (inference_top_down_pose_model, init_pose_model,
                          vis_pose_result, process_mmdet_results)
 from mmpose.core.evaluation.top_down_eval import (keypoint_nme,
-                                                  keypoint_pck_accuracy, keypoint_auc)
+                                                  keypoint_pck_accuracy2, keypoint_auc)
 import json
 
 
@@ -106,7 +106,7 @@ class TopDownCOCOTinyDataset():
 
         return name_value
 
-    def _report_metric(self, preds, metrics, pck_thr=0.5):
+    def _report_metric(self, preds, metrics, pck_thr=0.3):
         """Keypoint evaluation.
 
         Args:
@@ -138,8 +138,9 @@ class TopDownCOCOTinyDataset():
         normalize_factor = self._get_normalize_factor(gts)
 
         if 'PCK' in metrics:
-            acc, pck, _ = keypoint_pck_accuracy(outputs, gts, masks, pck_thr, normalize_factor)
+            acc, pck, cnt, distance = keypoint_pck_accuracy2(outputs, gts, masks, pck_thr, normalize_factor)
             info_str.append(('PCK', pck))
+            info_str.append(("Distance", distance.mean()))
 
         if 'NME' in metrics:
             info_str.append(
