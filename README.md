@@ -2,7 +2,7 @@
 
 This code is for [Okita, Y., Hirano, T., Wang, B. et al. Automatic evaluation of atlantoaxial subluxation in rheumatoid arthritis by a deep learning model. Arthritis Res Ther 25, 181 (2023)](https://doi.org/10.1186/s13075-023-03172-x). 
 
-If you have any questions about this code, please send a message to neck_ra_project@is.ids.osaka-u.ac.jp.
+If you have any questions about this code, please send a message to neck_ra_project[at]is.ids.osaka-u.ac.jp.
 
 ## Usage
 
